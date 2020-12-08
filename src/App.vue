@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <center>
-      <h1>hoidettavia asioita</h1>
-      <Todos v-bind:todos="todos" />
-    </center>
+    <h1>hoidettavia asioita</h1>
+    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
   </div>
 </template>
 
@@ -28,8 +26,23 @@ export default {
           title: "Tarkista tehtäväpalautukset",
           completed: false,
         },
+        {
+          id: 3,
+          title: "Nauhoita Djangokurssin viimeiset videot",
+          completed: false,
+        },
+        {
+          id: 4,
+          title: "Tee HOKS testi",
+          completed: false,
+        },
       ],
     };
+  },
+  methods: {
+    deleteTodo(id) {
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    },
   },
 };
 </script>
@@ -37,11 +50,12 @@ export default {
 <style>
 * {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
 }
 
 body {
+  margin-left: 10%;
+  max-width: 60%;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
 }
